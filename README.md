@@ -41,5 +41,37 @@
         )
     )
   ```
-  
+
+  ## animate*AsState
+
+  ### 단일 값을 애니메이션 처리하는 간단한 방법이다.
+
+  Compose는 `Float`, `Color`, `Dp`, `Size`, `Offset`, `Int`의 `animate*AsState() 함수를 제공한다.
+
+  ### 코드 적용
+
+  - 색상이 바뀌는 애니메이션을 적용하기 위해, 바뀌는 색상을 저장하는 변수를 선언하여 관리한다.
+    ```
+      val color
+    ```
+  - 초기화를 `color*AsState`로 한다.
+    ```
+      val color = animateColorAsState(
+        targetValue = if(expanded) Color.Blue
+                else Color.Red
+      )
+    ```
+  - 색상을 바꿀 컴포저블에 color를 적용한다.
+    ```
+      Column(
+        modifier = Modifier
+          .animateContentSize(
+            animationSpec = spring(
+              dampingRatio = Spring.DampingRatioNoBouncy,
+              stiffness = Spring.StiffnessMedium
+            )    
+          )
+          .background(color = color)
+      )
+    ```
 </p>
